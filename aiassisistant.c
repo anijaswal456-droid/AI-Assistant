@@ -1,34 +1,45 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 int main() {
     char input[100];
+    time_t t;
+    struct tm *current_time;
 
     printf("Welcome! I am your simple AI Assistant.\n");
-    printf("Ask me something:\n");
+    printf("Ask me anything (weather / time / hello / bye):\n");
 
-    // Get user input
+  
     fgets(input, sizeof(input), stdin);
-
-    // Remove newline (optional)
     input[strcspn(input, "\n")] = 0;
 
-    // Simple responses
-    if (strcmp(input, "hi") == 0 || strcmp(input, "hello") == 0) {
-        printf("Hello! How can I help you?\n");
+    
+    if (strcmp(input, "hello") == 0) {
+        printf("Hello! How can I help you today?\n");
     }
-    else if (strcmp(input, "your name") == 0) {
-        printf("I am a tiny C AI Assistant!\n");
+
+    else if (strcmp(input, "time") == 0) {
+        t = time(NULL);
+        current_time = localtime(&t);
+        printf("Current time is: %02d:%02d:%02d\n",
+               current_time->tm_hour,
+               current_time->tm_min,
+               current_time->tm_sec);
     }
-    else if (strcmp(input, "help") == 0) {
-        printf("Sure! You can ask me about weather, time, or general questions.\n");
+
+    else if (strcmp(input, "weather") == 0) {
+        printf("Today's weather looks great! (This is a dummy message as C cannot fetch real weather)\n");
     }
+
     else if (strcmp(input, "bye") == 0) {
-        printf("Goodbye! Have a great day!\n");
+        printf("Goodbye! Take care.\n");
     }
+
     else {
-        printf("Sorry, I don't understand that yet.\n");
+        printf("Sorry, I don't understand this command.\n");
     }
 
     return 0;
 }
+
